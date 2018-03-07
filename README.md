@@ -1,2 +1,2 @@
 # IndexingMergeSort
-Very fast sort of array using indexes
+Very fast and very simple sort of array using indexes.
