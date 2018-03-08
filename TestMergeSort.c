@@ -9,25 +9,25 @@ float A[N];
 int   B[N],C[N];
 
 
-void mergesort (long n, float a[], int b[], int c[])      //   1  2  3  4  5  6  7  8  9 10 11 12 13 14 15  ...
+void mergesort (long n, float a[], int ib[], int ic[])    //   1  2  3  4  5  6  7  8  9 10 11 12 13 14 15  ...
 {int ll, lr, le;                                          // |--|--|--|--|--|--|--|--|--|--|--|--|--|--|--| ...
- int i,j,k,l,m,nk;                                        //  ll          lr          le                    ... example for k=4
+ int i,j,k,m;                                             //  ll          lr          le                    ... example for k=4
                                                           //        SA1         SA2
 
- for (i=0; i<n; i++) {b[i]=i; c[i]=-1;}                   // set initial indexes
+ for (i=0; i<n; i++) ib[i]=i;                             // set initial index array
  for (k=1; k < n; k=k+k )                                 // outer cycle for increasing subarray (SA) size k
   {for (ll=0; ll+k < n; ll += k*2 )                       // ll = left index of the first SA
    {lr = ll + k;                                          // lr = right index of SA; inner cycle
     le = lr + k;                                          // le = end of second SA
     if (le > n) le = n;
     m = ll; i = ll; j = lr;
-    while (i < lr && j < le)                              // merge the first and the second SA into c
-     {if   (a[b[i]] <= a[b[j]]) {c[m] = b[i]; i++;}       // move from the first SA
-      else                      {c[m] = b[j]; j++;}       // move from the second SA
+    while (i < lr && j < le)                              // merge the first and the second SA into ic
+     {if   (a[ib[i]] <= a[ib[j]]) {ic[m] = ib[i]; i++;}   // move from the first SA
+      else                        {ic[m] = ib[j]; j++;}   // move from the second SA
       m++;}
-    while (i < lr) {c[m]=b[i]; i++; m++;}                 // move the rest of the first SA
-    while (j < le) {c[m]=b[j]; j++; m++;}                 // move the rest of the second SA
-    for (m=ll; m < le; m++) {b[m] = c[m];}                // move merged part into b, merging finished
+    while (i < lr) {ic[m]=ib[i]; i++; m++;}               // move the rest of the first SA
+    while (j < le) {ic[m]=ib[j]; j++; m++;}               // move the rest of the second SA
+    for (m=ll; m < le; m++) ib[m] = ic[m];                // move merged part into ib, merging finished
    }
   }
 }
